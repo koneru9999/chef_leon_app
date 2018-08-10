@@ -3,6 +3,9 @@ import 'package:chef_leon_app/radial_menu/radial_menu_item.dart';
 import 'package:chef_leon_app/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:chef_leon_app/generated/i18n.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'dart:io';
 
 enum MenuOptions { email, facebook, instagram, website }
 
@@ -12,51 +15,70 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Instance of WebView plugin
+  final flutterWebviewPlugin = new FlutterWebviewPlugin();
+
   GlobalKey<RadialMenuState> _menuKey = new GlobalKey<RadialMenuState>();
 
-  final List<RadialMenuItem<MenuOptions>> items = <RadialMenuItem<MenuOptions>>[
-    new RadialMenuItem<MenuOptions>(
-      value: MenuOptions.email,
-      child: const Icon(Icons.email),
-    ),
-    new RadialMenuItem<MenuOptions>(
-      value: MenuOptions.facebook,
-      child: const Icon(Icons.email),
-    ),
-    new RadialMenuItem<MenuOptions>(
-      value: MenuOptions.instagram,
-      child: const Icon(Icons.beach_access),
-    ),
-    new RadialMenuItem<MenuOptions>(
-      value: MenuOptions.website,
-      child: const Icon(Icons.web),
-    )
-  ];
+  void _onItemSelected(MenuOptions value) async {
+    print(value);
+    switch (value) {
+      case MenuOptions.email:
+        break;
+      case MenuOptions.facebook:
+        _launchURL(AppConstants.facebook_url);
+        break;
+      case MenuOptions.instagram:
+        _launchURL(AppConstants.instagram_url);
+        break;
+      case MenuOptions.website:
+        _launchURL(AppConstants.website_url);
+        break;
+    }
+  }
 
-  void _onItemSelected(MenuOptions value) {}
+  void _launchURL(url) {
+    flutterWebviewPlugin.launch(url);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    flutterWebviewPlugin.close();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    flutterWebviewPlugin.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.white,
       appBar: new AppBar(
         title: CircleAvatar(
             radius: 25.0,
             backgroundColor: Theme.of(context).primaryColor,
-            child: Image.asset(AppConstants.logo_path)),
+            child: Image(
+              image: AssetImage(AppConstants.logo_path),
+            )),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_library),
             onPressed: () => Navigator.of(context).pushNamed("/recipies"),
+          ),
+          IconButton(
+            icon: Icon(Icons.collections_bookmark),
+            onPressed: () => Navigator.of(context).pushNamed("/gallery"),
           )
         ],
       ),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(
-            //decoration: BoxDecoration(color: Colors.white),
-          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -65,24 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                          radius: 100.0,
-                          backgroundColor: Theme.of(context).primaryColor,
-                          child: new RadialMenu(
-                              key: _menuKey,
-                              items: items,
-                              onSelected: _onItemSelected,
-                              image: Image.asset(AppConstants.logo_path))
-                      ),
-                      Text(
-                        S.of(context).home_welcome_text,
-                        style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontSize: Theme.of(context).textTheme.title.fontSize
-                        ),
-                      )
-                    ],
+                    children: <Widget>[_getRadialMenu(), _getCaptionText()],
                   ),
                 ),
               ),
@@ -91,5 +96,52 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  CircleAvatar _getRadialMenu() {
+    return CircleAvatar(
+        radius: 100.0,
+        backgroundColor: Colors.white,
+        child: new RadialMenu(
+            key: _menuKey,
+            items: _getRadialMenuItems(),
+            onSelected: _onItemSelected,
+            image: AssetImage(AppConstants.logo_path)));
+  }
+
+  _getCaptionText() {
+    return Text(
+      S.of(context).home_welcome_text,
+      style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontSize: Theme.of(context).textTheme.title.fontSize),
+    );
+  }
+
+  List<RadialMenuItem<MenuOptions>> _getRadialMenuItems() {
+    return <RadialMenuItem<MenuOptions>>[
+      new RadialMenuItem<MenuOptions>(
+        value: MenuOptions.email,
+ //       tooltip: S.of(context).tooltip_email,
+        child: const Icon(Icons.email),
+      ),
+      new RadialMenuItem<MenuOptions>(
+        value: MenuOptions.facebook,
+//        tooltip: S.of(context).tooltip_facebook,
+        child: const Icon(FontAwesomeIcons.facebook),
+      ),
+      new RadialMenuItem<MenuOptions>(
+        value: MenuOptions.instagram,
+//        tooltip: S.of(context).tooltip_instagram,
+        child: const Icon(FontAwesomeIcons.instagram)
+      ),
+      new RadialMenuItem<MenuOptions>(
+        value: MenuOptions.website,
+//        tooltip: S.of(context).tooltip_website,
+        child: Platform.isAndroid
+            ? const Icon(FontAwesomeIcons.chrome)
+            : const Icon(FontAwesomeIcons.safari),
+      )
+    ];
   }
 }

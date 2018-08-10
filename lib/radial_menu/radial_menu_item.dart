@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const double _defaultButtonSize = 48.0;
+const double _defaultButtonSize = 64.0;
 
 /// An item in a [RadialMenu].
 ///

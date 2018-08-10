@@ -2,7 +2,7 @@ import 'package:chef_leon_app/radial_menu/radial_menu_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const double _defaultButtonSize = 128.0;
+const double _defaultButtonSize = 256.0;
 
 /// The button at the center of a [RadialMenu] which controls its open/closed
 /// state.

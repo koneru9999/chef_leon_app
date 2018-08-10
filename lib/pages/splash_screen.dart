@@ -39,7 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
                       CircleAvatar(
                         radius: 100.0,
                         backgroundColor: Colors.white,
-                        child: Image.asset(AppConstants.logo_path)
+                        child: Image(
+                            image: AssetImage(AppConstants.logo_path),
+                          colorBlendMode: BlendMode.darken,
+                        ),
                       ),
                       Text(
                         S.of(context).splash_screen_title,

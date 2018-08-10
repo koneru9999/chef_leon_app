@@ -24,7 +24,7 @@ class RecipiesList extends StatelessWidget {
         shadowColor: Colors.brown.shade900,
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, 'detail/${recipe.title}');
+            Navigator.pushNamed(context, 'recipies/detail/${recipe.id}');
           },
           child: Image(
             image: AssetImage(recipe.image),
@@ -52,7 +52,7 @@ class RecipiesList extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.white,
       appBar: appBar,
       body: grid,
     );

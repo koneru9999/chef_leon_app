@@ -58,7 +58,7 @@ class RadialMenu<T> extends StatefulWidget {
   /// Called when the user selects an item.
   final ValueChanged<T> onSelected;
 
-  final Image image;
+  final AssetImage image;
 
   /// The radius of the arc used to lay out the items and draw the progress bar.
   ///
@@ -88,8 +88,8 @@ class RadialMenuState extends State<RadialMenu> with TickerProviderStateMixin {
   // todo: xqwzts: allow users to pass in their own calculator as a param.
   // and change this to the default: radialItemAngleCalculator.
   double calculateItemAngle(int index) {
-    double _itemSpacing = 360.0 / widget.items.length;
-    return _startAngle + index * _itemSpacing * _radiansPerDegree;
+    //double _itemSpacing = 360.0 / widget.items.length;
+    return _startAngle + index * 30 * _radiansPerDegree;
   }
 
   @override
@@ -148,7 +148,9 @@ class RadialMenuState extends State<RadialMenu> with TickerProviderStateMixin {
       child: new RadialMenuButton(
         child: item,
         backgroundColor: item.backgroundColor,
-        onPressed: () => _activate(index),
+        onPressed: () {
+          _activate(index);
+        },
       ),
     );
   }
@@ -173,12 +175,11 @@ class RadialMenuState extends State<RadialMenu> with TickerProviderStateMixin {
     return new LayoutId(
       id: _RadialMenuLayout.menuButton,
       child: new RadialMenuCenterButton(
-        openCloseAnimationController: _menuAnimationController.view,
-        activateAnimationController: _progressAnimationController.view,
-        isOpen: _isOpen,
-        onPressed: _isOpen ? _closeMenu : _openMenu,
-        image: widget.image,
-      ),
+          openCloseAnimationController: _menuAnimationController.view,
+          activateAnimationController: _progressAnimationController.view,
+          isOpen: _isOpen,
+          onPressed: _isOpen ? _closeMenu : _openMenu,
+          image: Image(image: widget.image)),
     );
   }
 
@@ -233,8 +234,8 @@ class _RadialMenuLayout extends MultiChildLayoutDelegate {
     @required this.radius,
     @required this.calculateItemAngle,
     this.controller,
-  }) : _progress = new Tween<double>(begin: 0.0, end: radius).animate(
-      new CurvedAnimation(curve: Curves.elasticOut, parent: controller));
+  }) : _progress = new Tween<double>(begin: 0.0, end: 150.0).animate(
+            new CurvedAnimation(curve: Curves.elasticOut, parent: controller));
 
   Offset center;
 
@@ -279,7 +280,7 @@ class _RadialMenuLayout extends MultiChildLayoutDelegate {
 
       if (hasChild(actionButtonId)) {
         final Size buttonSize =
-        layoutChild(actionButtonId, new BoxConstraints.loose(size));
+            layoutChild(actionButtonId, new BoxConstraints.loose(size));
 
         final double itemAngle = calculateItemAngle(i);
 
@@ -299,8 +300,8 @@ class _RadialMenuLayout extends MultiChildLayoutDelegate {
   @override
   bool shouldRelayout(_RadialMenuLayout oldDelegate) =>
       itemCount != oldDelegate.itemCount ||
-          radius != oldDelegate.radius ||
-          calculateItemAngle != oldDelegate.calculateItemAngle ||
-          controller != oldDelegate.controller ||
-          _progress != oldDelegate._progress;
+      radius != oldDelegate.radius ||
+      calculateItemAngle != oldDelegate.calculateItemAngle ||
+      controller != oldDelegate.controller ||
+      _progress != oldDelegate._progress;
 }

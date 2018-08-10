@@ -1,5 +1,10 @@
 {
   "name": "Chef Leon",
   "splash_screen_title": "Welcome on Chef Leon's App !",
-  "home_welcome_text": "Click on me"
+  "home_welcome_text": "Click on me",
+  "tooltip_website": "Open website",
+  "tooltip_facebook": "Facebook page",
+  "tooltip_instagram": "Instagram page",
+  "tooltip_email": "Send an email to us",
+  "gallery_title": "Gallery"
 }

@@ -14,7 +14,7 @@ class RadialMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = backgroundColor ?? Theme.of(context).accentColor;
+    final Color color = backgroundColor ?? Theme.of(context).primaryColor;
 
     return new Semantics(
       button: true,

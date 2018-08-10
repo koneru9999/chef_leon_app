@@ -21,9 +21,14 @@ class S implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
+  String get gallery_title => "Gallery";
   String get home_welcome_text => "Click on me";
   String get name => "Chef Leon";
   String get splash_screen_title => "Welcome on Chef Leon's App !";
+  String get tooltip_email => "Send an email to us";
+  String get tooltip_facebook => "Facebook page";
+  String get tooltip_instagram => "Instagram page";
+  String get tooltip_website => "Open website";
 }
 
 class en extends S {
