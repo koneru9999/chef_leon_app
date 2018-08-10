@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:chef_leon_app/generated/i18n.dart';
+import 'package:chef_leon_app/utils/app_constants.dart';
 
 final Uint8List kTransparentImage = new Uint8List.fromList(<int>[
   0x89,
@@ -82,6 +83,7 @@ class Gallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        elevation: AppConstants.app_bar_elevation,
         title: new Text(S.of(context).gallery_title),
       ),
       body: new StaggeredGridView.countBuilder(

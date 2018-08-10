@@ -1,6 +1,7 @@
 import 'data.dart';
 import 'package:flutter/material.dart';
 import 'package:chef_leon_app/pages/book/rating_bar.dart';
+import 'package:chef_leon_app/utils/app_constants.dart';
 
 class RecipeDetail extends StatelessWidget {
   final Recipe recipe;
@@ -11,14 +12,8 @@ class RecipeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     //app bar
     final appBar = AppBar(
-      elevation: .5,
+      elevation: AppConstants.app_bar_elevation,
       title: Text('Recipe Books'),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {},
-        )
-      ],
     );
 
     ///detail of book image and it's pages

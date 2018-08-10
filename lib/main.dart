@@ -37,7 +37,7 @@ class ChefLeonApp extends StatelessWidget {
     );
   }
 
-  ///Generate parameterized route --> e.g: detail/some book title
+  ///Generate parameterized route --> e.g: recipies/detail/{id}
   generateRoute(RouteSettings settings) {
     if (settings.name.startsWith("recipies/detail/")) {
       final path = settings.name.split('/');

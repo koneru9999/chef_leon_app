@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return new Scaffold(
       backgroundColor: Colors.white,
       appBar: new AppBar(
+        elevation: AppConstants.app_bar_elevation,
         title: CircleAvatar(
             radius: 25.0,
             backgroundColor: Theme.of(context).primaryColor,
