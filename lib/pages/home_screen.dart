@@ -123,22 +123,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return <RadialMenuItem<MenuOptions>>[
       new RadialMenuItem<MenuOptions>(
         value: MenuOptions.email,
- //       tooltip: S.of(context).tooltip_email,
         child: const Icon(Icons.email),
       ),
       new RadialMenuItem<MenuOptions>(
         value: MenuOptions.facebook,
-//        tooltip: S.of(context).tooltip_facebook,
         child: const Icon(FontAwesomeIcons.facebook),
       ),
       new RadialMenuItem<MenuOptions>(
         value: MenuOptions.instagram,
-//        tooltip: S.of(context).tooltip_instagram,
         child: const Icon(FontAwesomeIcons.instagram)
       ),
       new RadialMenuItem<MenuOptions>(
         value: MenuOptions.website,
-//        tooltip: S.of(context).tooltip_website,
         child: Platform.isAndroid
             ? const Icon(FontAwesomeIcons.chrome)
             : const Icon(FontAwesomeIcons.safari),
