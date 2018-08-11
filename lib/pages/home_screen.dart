@@ -69,11 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_library),
-            onPressed: () => Navigator.of(context).pushNamed("/recipies"),
+            onPressed: () => Navigator.of(context).pushNamed("/gallery"),
           ),
           IconButton(
             icon: Icon(Icons.collections_bookmark),
-            onPressed: () => Navigator.of(context).pushNamed("/gallery"),
+            onPressed: () => Navigator.of(context).pushNamed("/recipies"),
           )
         ],
       ),
